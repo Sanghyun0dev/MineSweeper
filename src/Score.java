@@ -8,8 +8,8 @@ public class Score extends JLabel {
     public Score(Frame f) {
         this.frame = f;
         this.score = 0;
-        setLocation(30,20);
-        setBounds(30,20,24,24);
+        setBounds(10, 20, 60, 24);
+        setFont(new Font("Arial", Font.BOLD, 16));
         setText(""+score);
     }
 
