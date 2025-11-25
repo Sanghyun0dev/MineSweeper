@@ -17,7 +17,8 @@ public class Board {
         }
     }
 
-    int getValue(int r, int c) {
+    int getValue(int n) { //shovel
+        int r=n/10, c=n%10;
         if (board[r][c]==1) return -1;
         return board[r-1][c-1]+board[r-1][c+1]+board[r-1][c]
                 +board[r][c-1]+board[r][c+1]
