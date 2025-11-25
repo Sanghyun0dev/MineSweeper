@@ -1,31 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Score extends JPanel {
+public class Score extends JLabel {
     private Frame frame;
     private int score;
 
-    public Score(Frame f, int score) {
+    public Score(Frame f) {
         this.frame = f;
-        this.score = score;
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.black);
-        g.fillRect(10, 10, 30, 10);
-        g.setColor(Color.white);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Score: " + score, 10, 10);
-    }
-
-    public int getScore() {
-        return score;
+        this.score = 20;
+        setLocation(30,20);
+        setBounds(30,20,24,24);
+        setText(""+score);
     }
 
     public void findOne(){
         this.score--;
-        this.set
+        setText(""+score);
         if (this.score == 0){
             frame.gameClear();
         }

@@ -8,50 +8,62 @@ public class Cell extends JButton implements ActionListener {
     private Frame frame;
     private int number; //cell id
     private boolean is_open = false;
+    private boolean is_flag = false;
 
     public Cell(Board b, Frame f, int n) {
-        this.board = b;
-        this.frame = f;
-        this.number = n;
-        addActionListener(this);
+        board = b;
+        frame = f;
+        number = n;
 
         int r=number/10, c=number%10;
-        setBounds(r*24+10, c*24+40, 30, 30);
-        setVisible(true);
+        setBounds(r*24+10, c*24+64, 24, 24);
+
+        setMargin(new Insets(0, 0, 0, 0));
+        setHorizontalTextPosition(SwingConstants.CENTER);
+        setVerticalTextPosition(SwingConstants.CENTER);
+        setFont(getFont().deriveFont(Font.BOLD, 12f));
+
+        addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (board.tool==0){ //flag
-            if (!this.is_open){
-                set_flag();
+        if (!is_open) {
+            if (board.tool == 0) { //flag
+                if (!is_flag) {
+                    set_flag();
+                } else {
+                    unset_flag();
+                }
             }
-            else {
-                unset_flag();
+            else { //shovel
+                dig();
             }
-        }
-        else { //shovel
-            dig();
         }
     }
 
     public void set_flag(){
-        this.setIcon(new ImageIcon("src/images/flag.png"));
+        setIcon(new ImageIcon("src/images/flag.png"));
+        is_flag = true;
     }
 
     public void unset_flag(){
-        this.setIcon(null);
+        setIcon(null);
+        is_flag = false;
     }
 
     public void dig(){
-        this.is_open = true;
-        int cnt = board.getValue(this.number);
+        if (is_flag) {
+            unset_flag();
+        }
+        int cnt = board.getValue(number);
         if (cnt==-1){
-            this.setIcon(new ImageIcon("src/images/bomb.png"));
+            setIcon(new ImageIcon("src/images/bomb.png"));
             frame.gameOver();
         }
         else {
-            this.setText(""+cnt);
+            setText(""+cnt);
             frame.find();
         }
+        is_open = true;
     }
 }
