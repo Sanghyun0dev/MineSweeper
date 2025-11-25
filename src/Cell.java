@@ -29,11 +29,8 @@ public class Cell extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!is_open) {
             if (board.tool == 0) { //flag
-                if (!is_flag) {
-                    set_flag();
-                } else {
-                    unset_flag();
-                }
+                if (!is_flag) set_flag();
+                else unset_flag();
             }
             else { //shovel
                 dig();
@@ -75,7 +72,7 @@ public class Cell extends JButton implements ActionListener {
     }
     boolean valid(int r, int c){
         if (r<0 || r>=9 || c<0 || c>=9) return false;
-        if (frame.cells[r][c].is_open) return false;
-        return true;
+        else if (frame.cells[r][c].is_open) return false;
+        else return true;
     }
 }

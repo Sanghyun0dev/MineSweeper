@@ -11,10 +11,8 @@ public class Frame extends JFrame {
     public Frame(Board board) {
         this.board = board;
 
-        //setLayout(null);
         setTitle("Mine Sweeper");
         setLayout(new BorderLayout());
-        //setSize(24*9+20, 24*9+74);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 

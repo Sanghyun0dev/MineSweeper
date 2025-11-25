@@ -7,18 +7,18 @@ public class Board {
 
     public Board() {
         Random rand = new Random();
-        int i=20;
-        while (i!=0){
-            int row=rand.nextInt(9);
-            int col=rand.nextInt(9);
-            if (board[row][col]==0){
-                board[row][col]=1;
+        int i = 20;
+        while (i != 0) {
+            int row = rand.nextInt(9);
+            int col = rand.nextInt(9);
+            if (board[row][col] == 0) {
+                board[row][col] = 1;
                 i--;
             }
         }
-        for(i=0;i<9;i++){
-            for(int j=0;j<9;j++){
-                if (board[i][j]==1) cnts[i][j]=-1;
+        for (i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == 1) cnts[i][j] = -1;
                 else {
                     cnts[i][j] = getValue(i - 1, j - 1) + getValue(i - 1, j) + getValue(i - 1, j + 1)
                             + getValue(i, j - 1) + getValue(i, j + 1)
@@ -28,16 +28,8 @@ public class Board {
         }
     }
 
-    int getValue(int r, int c){
-        if (r<0 || r>=9 || c<0 || c>=9) return 0;
+    int getValue(int r, int c) {
+        if (r < 0 || r >= 9 || c < 0 || c >= 9) return 0;
         else return board[r][c];
     }
-
-//    int getValue(int n) { //shovel
-//        int r=n/10, c=n%10;
-//        if (board[r][c]==1) return -1;
-//        return board[r-1][c-1]+board[r-1][c+1]+board[r-1][c]
-//                +board[r][c-1]+board[r][c+1]
-//                +board[r+1][c-1]+board[r+1][c]+board[r+1][c+1];
-//    }
 }
