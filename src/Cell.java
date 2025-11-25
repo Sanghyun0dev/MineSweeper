@@ -18,10 +18,10 @@ public class Cell extends JButton implements ActionListener {
         int r=number/10, c=number%10;
         setBounds(r*24+10, c*24+64, 24, 24);
 
+        setPreferredSize(new Dimension(24, 24));
         setMargin(new Insets(0, 0, 0, 0));
-        setHorizontalTextPosition(SwingConstants.CENTER);
-        setVerticalTextPosition(SwingConstants.CENTER);
         setFont(getFont().deriveFont(Font.BOLD, 12f));
+        setFocusPainted(false);
 
         addActionListener(this);
     }
@@ -67,14 +67,15 @@ public class Cell extends JButton implements ActionListener {
         is_open = true;
 
         if (cnt==0) {
-            if (is_zero(r-1,c)) frame.cells[r-1][c].dig();
-            if (is_zero(r+1,c)) frame.cells[r+1][c].dig();
-            if (is_zero(r,c-1)) frame.cells[r][c-1].dig();
-            if (is_zero(r,c+1)) frame.cells[r][c+1].dig();
+            if (valid(r-1,c)) frame.cells[r-1][c].dig();
+            if (valid(r+1,c)) frame.cells[r+1][c].dig();
+            if (valid(r,c-1)) frame.cells[r][c-1].dig();
+            if (valid(r,c+1)) frame.cells[r][c+1].dig();
         }
     }
-    boolean is_zero(int r, int c){
+    boolean valid(int r, int c){
         if (r<0 || r>=9 || c<0 || c>=9) return false;
-        return board.cnts[r][c]==0;
+        if (frame.cells[r][c].is_open) return false;
+        return true;
     }
 }

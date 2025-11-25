@@ -8,7 +8,7 @@ public class Score extends JLabel {
     public Score(Frame f) {
         this.frame = f;
         this.score = 0;
-        setBounds(10, 20, 60, 24);
+        setPreferredSize(new Dimension(60, 24));
         setFont(new Font("Arial", Font.BOLD, 16));
         setText(""+score);
     }
@@ -16,7 +16,7 @@ public class Score extends JLabel {
     public void findOne(){
         this.score++;
         setText(""+score);
-        if (this.score == 81){
+        if (this.score == 61){
             frame.gameClear();
         }
     }

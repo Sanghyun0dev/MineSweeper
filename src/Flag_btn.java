@@ -10,7 +10,7 @@ public class Flag_btn extends JButton implements ActionListener{
     public Flag_btn(Board b, Frame f){
         this.board = b;
         this.frame = f;
-        setBounds(148, 20, 24, 24);
+        setPreferredSize(new Dimension(24, 24));
         setIcon(new ImageIcon("src/images/flag.png"));
 
         addActionListener(this);

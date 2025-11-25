@@ -10,28 +10,35 @@ public class Frame extends JFrame {
 
     public Frame(Board board) {
         this.board = board;
-        JFrame f = this;
 
-        f.setLayout(null);
-        f.setLocationRelativeTo(null);
-        f.setTitle("Mine Sweeper");
-        f.setSize(24*9+20, 24*9+74);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setLayout(null);
+        setTitle("Mine Sweeper");
+        setLayout(new BorderLayout());
+        //setSize(24*9+20, 24*9+74);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        score = new Score(this);
+        topPanel.add(score);
+        flag = new Flag_btn(board,this);
+        topPanel.add(flag);
+        shovel = new Shovel_btn(board,this);
+        topPanel.add(shovel);
+        add(topPanel, BorderLayout.NORTH);
+
+        JPanel borderPanel = new JPanel(new GridLayout(9,9));
         for (int r=0;r<9;r++){
             for (int c=0;c<9;c++){
                 cells[r][c] = new Cell(board,this,r*10+c);
-                f.add(cells[r][c]);
+                borderPanel.add(cells[r][c]);
             }
         }
-        score = new Score(this);
-        f.add(score);
-        flag = new Flag_btn(board,this);
-        f.add(flag);
-        shovel = new Shovel_btn(board,this);
-        f.add(shovel);
+        add(borderPanel, BorderLayout.CENTER);
 
-        f.setVisible(true);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void find(){
@@ -50,10 +57,10 @@ public class Frame extends JFrame {
     }
 
     public void gameOver() {
-        JOptionPane.showMessageDialog(null, "Game Over");
+        JOptionPane.showMessageDialog(this, "Game Over");
     }
 
     public void gameClear(){
-        JOptionPane.showMessageDialog(null, "Game Clear!");
+        JOptionPane.showMessageDialog(this, "Game Clear!");
     }
 }
