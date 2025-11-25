@@ -52,10 +52,10 @@ public class Cell extends JButton implements ActionListener {
     }
 
     public void dig(){
-        if (is_flag) {
-            unset_flag();
-        }
-        int cnt = board.getValue(number);
+        setIcon(null);
+
+        int r=number/10, c=number%10;
+        int cnt = board.cnts[r][c];
         if (cnt==-1){
             setIcon(new ImageIcon("src/images/bomb.png"));
             frame.gameOver();
@@ -65,5 +65,16 @@ public class Cell extends JButton implements ActionListener {
             frame.find();
         }
         is_open = true;
+
+        if (cnt==0) {
+            if (is_zero(r-1,c)) frame.cells[r-1][c].dig();
+            if (is_zero(r+1,c)) frame.cells[r+1][c].dig();
+            if (is_zero(r,c-1)) frame.cells[r][c-1].dig();
+            if (is_zero(r,c+1)) frame.cells[r][c+1].dig();
+        }
+    }
+    boolean is_zero(int r, int c){
+        if (r<0 || r>=9 || c<0 || c>=9) return false;
+        return board.cnts[r][c]==0;
     }
 }

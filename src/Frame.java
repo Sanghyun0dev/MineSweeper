@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Frame extends JFrame {
     private Board board;
-    private Cell[][] cells = new Cell[9][9];
+    public Cell[][] cells = new Cell[9][9];
     private Score score;
     private Flag_btn flag;
     private Shovel_btn shovel;

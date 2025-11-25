@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Board {
     private int[][] board = new int[9][9];
+    public int[][] cnts = new int[9][9];
     public int tool = 0; //0: flag, 1: shovel
 
     public Board() {
@@ -15,13 +16,28 @@ public class Board {
                 i--;
             }
         }
+        for(i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if (board[i][j]==1) cnts[i][j]=-1;
+                else {
+                    cnts[i][j] = getValue(i - 1, j - 1) + getValue(i - 1, j) + getValue(i - 1, j + 1)
+                            + getValue(i, j - 1) + getValue(i, j + 1)
+                            + getValue(i + 1, j - 1) + getValue(i + 1, j) + getValue(i + 1, j + 1);
+                }
+            }
+        }
     }
 
-    int getValue(int n) { //shovel
-        int r=n/10, c=n%10;
-        if (board[r][c]==1) return -1;
-        return board[r-1][c-1]+board[r-1][c+1]+board[r-1][c]
-                +board[r][c-1]+board[r][c+1]
-                +board[r+1][c-1]+board[r+1][c]+board[r+1][c+1];
+    int getValue(int r, int c){
+        if (r<0 || r>=9 || c<0 || c>=9) return 0;
+        else return board[r][c];
     }
+
+//    int getValue(int n) { //shovel
+//        int r=n/10, c=n%10;
+//        if (board[r][c]==1) return -1;
+//        return board[r-1][c-1]+board[r-1][c+1]+board[r-1][c]
+//                +board[r][c-1]+board[r][c+1]
+//                +board[r+1][c-1]+board[r+1][c]+board[r+1][c+1];
+//    }
 }

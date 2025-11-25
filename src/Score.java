@@ -7,16 +7,16 @@ public class Score extends JLabel {
 
     public Score(Frame f) {
         this.frame = f;
-        this.score = 20;
+        this.score = 0;
         setLocation(30,20);
         setBounds(30,20,24,24);
         setText(""+score);
     }
 
     public void findOne(){
-        this.score--;
+        this.score++;
         setText(""+score);
-        if (this.score == 0){
+        if (this.score == 81){
             frame.gameClear();
         }
     }
